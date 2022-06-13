@@ -1,0 +1,235 @@
+{
+	"info": {
+		"_postman_id": "3233ea37-2672-4226-93b2-b1995606aa71",
+		"name": "tempDemoApp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21440321"
+	},
+	"item": [
+		{
+			"name": "import",
+			"item": [
+				{
+					"name": "importUsersWithSensors",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/users/import",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"users",
+								"import"
+							]
+						},
+						"description": "import Users , Sensors and their relationship.  \ncsv file structure:\n\n| name | userId | sensorId | sensorModel |\n\n*   where name =the user name"
+					},
+					"response": []
+				},
+				{
+					"name": "importTemperatures",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/temperatures/import",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"temperatures",
+								"import"
+							]
+						},
+						"description": "import Temperatures connected to already present Sensors.  \ncsv file structure:\n\n| id | level | date | sensorid |\n\n*   id= temperature id: \\[level\\]_\\[date\\]\n    \n\n*   level = level of temperature (float)\n*   date = date of detection"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "testRequiredEndpoints",
+			"item": [
+				{
+					"name": "addTemperatureToSensor",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"level\": \"41\",\r\n    \"sensorId\":\"sens7\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/sensors/temperature/new",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"sensors",
+								"temperature",
+								"new"
+							]
+						},
+						"description": "add new Temperature by setting as body info the level of temperature and the sensorId that has detected it.\n\nJSON body structure:  \n{  \n\"level\":\"36.6\",  \n\"sensorId\":\"sens2\"  \n}\n\n*Sensors available after import :\n\n| sens1 |  \n| sens2 |  \n| sens3 |  \n| sens4 |  \n| sens5 |  \n| sens6 |  \n| sens7 |  \n| sens8 |"
+					},
+					"response": []
+				},
+				{
+					"name": "getUserDailyTemperatures",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/users/temperatures/daily/8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"users",
+								"temperatures",
+								"daily",
+								"8"
+							],
+							"query": [
+								{
+									"key": "8",
+									"value": null,
+									"disabled": true
+								}
+							]
+						},
+						"description": "You can GET a user's **daily** temperature data by adding the userid(int) in the end of the request:  \nFor example in this case we send the request for user with id **8**\n\n[http://localhost:8081/users/temperatures/daily/](http://localhost:8081/users/temperatures/hourly/**`8`)8\n\nEndFragment"
+					},
+					"response": []
+				},
+				{
+					"name": "getUserHourlyTemperatures",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/users/temperatures/hourly/8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"users",
+								"temperatures",
+								"hourly",
+								"8"
+							]
+						},
+						"description": "You can GET a user's **hourly** (within the current day) temperature data by adding the userid(int) in the end of the request:  \nFor example in this case we send the request for user with id **8**\n\n[http://localhost:8081/users/temperatures/hourly/](http://localhost:8081/users/temperatures/hourly/**`8`)8"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "exploreData",
+			"item": [
+				{
+					"name": "getAllUsers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/users/all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"users",
+								"all"
+							]
+						},
+						"description": "get all Users"
+					},
+					"response": []
+				},
+				{
+					"name": "getAllSensors",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/sensors/all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"sensors",
+								"all"
+							]
+						},
+						"description": "get All Sensors"
+					},
+					"response": []
+				},
+				{
+					"name": "getAllTemperatures",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/temperatures/all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"temperatures",
+								"all"
+							]
+						},
+						"description": "get all Temperatures"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "clearAllData",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/users/clear",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"users",
+						"clear"
+					]
+				},
+				"description": "clear everything present in the dataset"
+			},
+			"response": []
+		}
+	]
+}
